@@ -5,6 +5,14 @@ Kotlin Multiplatform (KMP) library that adds basic support for Unicode code poin
 **Note:** This library is a side project and work in progress. When evaluating whether to use this in production, please
 consider this project unmaintained. That being said, contributions are welcome. But don't expect fast responses.
 
+## Installation
+kotlin-codepoints is distributed through Maven Central.
+
+```kotlin
+dependencies {
+    implementation("de.cketti.unicode:kotlin-codepoints:0.1.0")
+}
+```
 
 ## Features
 
