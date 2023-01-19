@@ -1,6 +1,7 @@
 import java.util.Properties
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
     kotlin("multiplatform") version "1.8.0"
@@ -16,32 +17,53 @@ repositories {
 }
 
 kotlin {
+    androidNativeArm32()
+    androidNativeArm64()
+    androidNativeX86()
+    androidNativeX64()
+
+    iosArm32()
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
+
+    js(IR) {
+        browser {}
+    }
+
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
         }
-        withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
     }
-    
-    js(IR) {
-        browser {}
-    }
-    
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
-    val nativeTarget = when {
-        hostOs == "Mac OS X" -> macosX64("native")
-        hostOs == "Linux" -> linuxX64("native")
-        isMingwX64 -> mingwX64("native")
-        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-    }
-    
-    sourceSets {
-        val commonImplementation by creating
 
+    linuxArm64()
+    linuxArm32Hfp()
+    linuxX64()
+
+    macosX64()
+    macosArm64()
+
+    mingwX64()
+    mingwX86()
+
+    tvosArm64()
+    tvosX64()
+    tvosSimulatorArm64()
+
+    wasm32()
+
+    watchosArm32()
+    watchosArm64()
+    watchosDeviceArm64()
+    watchosX86()
+    watchosX64()
+    watchosSimulatorArm64()
+
+    sourceSets {
         val commonMain by getting
         val commonTest by getting {
             dependencies {
@@ -49,20 +71,19 @@ kotlin {
             }
         }
 
-        val jvmMain by getting
+        val commonImplementation by creating {
+            dependsOn(commonMain)
+        }
+
         val jvmTest by getting {
             dependsOn(commonImplementation)
         }
+    }
 
-        val jsMain by getting {
-            dependsOn(commonImplementation)
+    targets.onEach {
+        if (it.platformType != KotlinPlatformType.jvm) {
+            it.compilations.getByName("main").source(sourceSets.getByName("commonImplementation"))
         }
-        val jsTest by getting
-
-        val nativeMain by getting {
-            dependsOn(commonImplementation)
-        }
-        val nativeTest by getting
     }
 }
 
