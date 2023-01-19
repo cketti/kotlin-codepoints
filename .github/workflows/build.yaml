@@ -1,12 +1,21 @@
 name: build
 
 on:
-  pull_request: {}
+  pull_request:
+    paths-ignore:
+      - '.idea/**'
+      - '.gitignore'
+      - '*.md'
+
   push:
     branches:
       - 'main'
     tags-ignore:
       - '**'
+    paths-ignore:
+      - '.idea/**'
+      - '.gitignore'
+      - '*.md'
 
 env:
   GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
