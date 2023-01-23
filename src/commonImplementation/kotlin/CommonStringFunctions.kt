@@ -1,7 +1,5 @@
 package de.cketti.codepoints
 
-import de.cketti.codepoints.CommonCodePoints.isHighSurrogate
-import de.cketti.codepoints.CommonCodePoints.isLowSurrogate
 import de.cketti.codepoints.CommonCodePoints.toCodePoint
 
 object CommonStringFunctions {
@@ -9,9 +7,9 @@ object CommonStringFunctions {
         if (index !in text.indices) throw IndexOutOfBoundsException()
 
         val firstChar = text[index]
-        if (isHighSurrogate(firstChar) && index + 1 < text.length) {
+        if (firstChar.isHighSurrogate() && index + 1 < text.length) {
             val nextChar = text[index + 1]
-            if (isLowSurrogate(nextChar)) {
+            if (nextChar.isLowSurrogate()) {
                 return toCodePoint(firstChar, nextChar)
             }
         }
@@ -24,9 +22,9 @@ object CommonStringFunctions {
         if (startIndex !in text.indices) throw IndexOutOfBoundsException()
     
         val firstChar = text[startIndex]
-        if (isLowSurrogate(firstChar) && startIndex - 1 >= 0) {
+        if (firstChar.isLowSurrogate() && startIndex - 1 >= 0) {
             val previousChar = text[startIndex - 1]
-            if (isHighSurrogate(previousChar)) {
+            if (previousChar.isHighSurrogate()) {
                 return toCodePoint(previousChar, firstChar)
             }
         }
@@ -42,9 +40,9 @@ object CommonStringFunctions {
         do {
             val firstChar = text[index]
             index++
-            if (isHighSurrogate(firstChar) && index < endIndex) {
+            if (firstChar.isHighSurrogate() && index < endIndex) {
                 val nextChar = text[index]
-                if (isLowSurrogate(nextChar)) {
+                if (nextChar.isLowSurrogate()) {
                     index++
                 }
             }
@@ -65,9 +63,9 @@ object CommonStringFunctions {
                 if (currentIndex > text.lastIndex) throw IndexOutOfBoundsException()
                 val firstChar = text[currentIndex]
                 currentIndex++
-                if (isHighSurrogate(firstChar) && currentIndex <= text.lastIndex) {
+                if (firstChar.isHighSurrogate() && currentIndex <= text.lastIndex) {
                     val nextChar = text[currentIndex]
-                    if (isLowSurrogate(nextChar)) {
+                    if (nextChar.isLowSurrogate()) {
                         currentIndex++
                     }
                 }
@@ -80,9 +78,9 @@ object CommonStringFunctions {
                 if (currentIndex < 0) throw IndexOutOfBoundsException()
                 val firstChar = text[currentIndex]
                 currentIndex--
-                if (isLowSurrogate(firstChar) && currentIndex >= 0) {
+                if (firstChar.isLowSurrogate() && currentIndex >= 0) {
                     val previousChar = text[currentIndex]
-                    if (isHighSurrogate(previousChar)) {
+                    if (previousChar.isHighSurrogate()) {
                         currentIndex--
                     }
                 }

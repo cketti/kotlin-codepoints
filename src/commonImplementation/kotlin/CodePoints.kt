@@ -19,18 +19,6 @@ actual object CodePoints {
         return CommonCodePoints.charCount(codePoint)
     }
 
-    actual inline fun isSurrogate(char: Char): Boolean {
-        return CommonCodePoints.isSurrogate(char)
-    }
-
-    actual inline fun isHighSurrogate(char: Char): Boolean {
-        return CommonCodePoints.isHighSurrogate(char)
-    }
-    
-    actual inline fun isLowSurrogate(char: Char): Boolean {
-        return CommonCodePoints.isLowSurrogate(char)
-    }
-
     actual inline fun isSurrogatePair(highSurrogate: Char, lowSurrogate: Char): Boolean {
         return CommonCodePoints.isSurrogatePair(highSurrogate, lowSurrogate)
     }
