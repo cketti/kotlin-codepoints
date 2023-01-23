@@ -32,40 +32,11 @@ expect object CodePoints {
     fun charCount(codePoint: Int): Int
 
     /**
-     * Determines if the given `Char` value is a Unicode surrogate code unit.
-     *
-     * Such values do not represent characters by themselves, but are used in the representation of supplementary
-     * characters in the UTF-16 encoding.
-     *
-     * A `Char` value is a surrogate code unit if and only if it is either a [low surrogate][isLowSurrogate] code unit 
-     * or a [high surrogate][isHighSurrogate] code unit.
-     */
-    fun isSurrogate(char: Char): Boolean
-
-    /**
-     * Determines if the given `Char` value is a Unicode high-surrogate code unit (also known as leading-surrogate 
-     * code unit).
-     *
-     * Such values do not represent characters by themselves, but are used in the representation of 
-     * [supplementary characters][isSupplementaryCodePoint] in the UTF-16 encoding.
-     */
-    fun isHighSurrogate(char: Char): Boolean
-
-    /**
-     * Determines if the given `Char` value is a Unicode low-surrogate code unit (also known as trailing-surrogate 
-     * code unit).
-     *
-     * Such values do not represent characters by themselves, but are used in the representation of
-     * [supplementary characters][isSupplementaryCodePoint] in the UTF-16 encoding.
-     */
-    fun isLowSurrogate(char: Char): Boolean
-
-    /**
      * Determines whether the specified pair of `Char` values is a valid Unicode surrogate pair.
      *
      * This method is equivalent to the expression:
      * ```kotlin
-     * isHighSurrogate(highSurrogate) && isLowSurrogate(lowSurrogate)
+     * highSurrogate.isHighSurrogate() && lowSurrogate.isLowSurrogate()
      * ```
      */
     fun isSurrogatePair(highSurrogate: Char, lowSurrogate: Char): Boolean
@@ -77,8 +48,8 @@ expect object CodePoints {
      * If the specified character is not a supplementary character, an unspecified `Char` is returned.
      *
      * If [`isSupplementaryCodePoint(x)`][isSupplementaryCodePoint] is `true`, then 
-     * [isHighSurrogate]`(highSurrogate(x))` and 
-     * [toCodePoint][toCodePoint]`(highSurrogate(x), `[`lowSurrogate(x)`][lowSurrogate]`) == x` are also always `true`.
+     * [isHighSurrogate]`(x.highSurrogate())` and
+     * [toCodePoint][toCodePoint]`(x.highSurrogate(), `[`x.lowSurrogate()`][lowSurrogate]`) == x` are also always `true`.
      */
     fun highSurrogate(codePoint: Int): Char
 
@@ -89,8 +60,8 @@ expect object CodePoints {
      * If the specified character is not a supplementary character, an unspecified char is returned.
      *
      * If [`isSupplementaryCodePoint(x)`][isSupplementaryCodePoint] is `true`, then
-     * [isLowSurrogate]`(lowSurrogate(x))` and
-     * [toCodePoint][toCodePoint]`(`[`highSurrogate(x)`][highSurrogate], `lowSurrogate(x)) == x` are also always `true`.
+     * [isLowSurrogate]`(x.lowSurrogate())` and
+     * [toCodePoint][toCodePoint]`(`[`x.highSurrogate()`][highSurrogate], `x.lowSurrogate()) == x` are also always `true`.
      */
     fun lowSurrogate(codePoint: Int): Char
 

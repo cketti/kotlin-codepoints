@@ -51,47 +51,6 @@ class CodePointsTest {
     }
 
     @Test
-    fun isSurrogate() {
-        assertTrue(CodePoints.isSurrogate('\uD800'))
-        assertTrue(CodePoints.isSurrogate('\uDBFF'))
-        assertTrue(CodePoints.isSurrogate('\uDC00'))
-        assertTrue(CodePoints.isSurrogate('\uDFFF'))
-
-        assertFalse(CodePoints.isSurrogate('a'))
-        assertFalse(CodePoints.isSurrogate(0xFFFF.toChar()))
-        assertFalse(CodePoints.isSurrogate('\uD7FF'))
-        assertFalse(CodePoints.isSurrogate('\uE000'))
-    }
-
-    @Test
-    fun isHighSurrogate() {
-        assertTrue(CodePoints.isHighSurrogate('\uD800'))
-        assertTrue(CodePoints.isHighSurrogate('\uDBFF'))
-        
-        assertFalse(CodePoints.isHighSurrogate('\uDC00'))
-        assertFalse(CodePoints.isHighSurrogate('\uDFFF'))
-
-        assertFalse(CodePoints.isHighSurrogate('a'))
-        assertFalse(CodePoints.isHighSurrogate(0xFFFF.toChar()))
-        assertFalse(CodePoints.isHighSurrogate('\uD7FF'))
-        assertFalse(CodePoints.isHighSurrogate('\uE000'))
-    }
-
-    @Test
-    fun isLowSurrogate() {
-        assertTrue(CodePoints.isLowSurrogate('\uDC00'))
-        assertTrue(CodePoints.isLowSurrogate('\uDFFF'))
-
-        assertFalse(CodePoints.isLowSurrogate('\uD800'))
-        assertFalse(CodePoints.isLowSurrogate('\uDBFF'))
-        
-        assertFalse(CodePoints.isLowSurrogate('a'))
-        assertFalse(CodePoints.isLowSurrogate(0xFFFF.toChar()))
-        assertFalse(CodePoints.isLowSurrogate('\uD7FF'))
-        assertFalse(CodePoints.isLowSurrogate('\uE000'))
-    }
-
-    @Test
     fun isSurrogatePair() {
         assertTrue(CodePoints.isSurrogatePair('\uD800', '\uDC00'))
         assertTrue(CodePoints.isSurrogatePair('\uDBFF', '\uDC00'))
