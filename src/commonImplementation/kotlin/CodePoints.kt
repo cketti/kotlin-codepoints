@@ -46,4 +46,12 @@ actual object CodePoints {
     actual inline fun toCodePoint(highSurrogate: Char, lowSurrogate: Char): Int {
         return CommonCodePoints.toCodePoint(highSurrogate, lowSurrogate)
     }
+
+    actual inline fun toChars(codePoint: Int): CharArray {
+        return CommonCodePoints.toChars(codePoint)
+    }
+
+    actual inline fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int {
+        return CommonCodePoints.toChars(codePoint, destination, offset)
+    }
 }
