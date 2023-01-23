@@ -58,4 +58,29 @@ object CommonCodePoints {
     fun toCodePoint(highSurrogate: Char, lowSurrogate: Char): Int {
         return (highSurrogate.code shl 10) + lowSurrogate.code + SURROGATE_DECODE_OFFSET
     }
+
+    fun toChars(codePoint: Int): CharArray {
+        return if (isBmpCodePoint(codePoint)) {
+            charArrayOf(codePoint.toChar())
+        } else {
+            charArrayOf(highSurrogate(codePoint), lowSurrogate(codePoint))
+        }
+    }
+
+    fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int {
+        val size = destination.size
+        if (offset >= 0) {
+            if (isBmpCodePoint(codePoint)) {
+                if (offset < size) {
+                    destination[offset] = codePoint.toChar()
+                    return 1
+                }
+            } else if (offset < size - 1) {
+                destination[offset] = highSurrogate(codePoint)
+                destination[offset + 1] = lowSurrogate(codePoint)
+                return 2
+            }
+        }
+        throw IndexOutOfBoundsException("Size: $size, offset: $offset")
+    }
 }

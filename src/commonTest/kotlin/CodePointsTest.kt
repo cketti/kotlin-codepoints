@@ -1,7 +1,9 @@
 package de.cketti.codepoints
 
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -119,5 +121,76 @@ class CodePointsTest {
     @Test
     fun toCodePoint() {
         assertEquals(0x1F995, CodePoints.toCodePoint('\uD83E', '\uDD95'))
+    }
+
+    @Test
+    fun toChars() {
+        assertContentEquals(charArrayOf('a'), CodePoints.toChars('a'.code))
+        assertContentEquals(charArrayOf('\uFFFF'), CodePoints.toChars(0xFFFF))
+        assertContentEquals(charArrayOf('\uD83E', '\uDD95'), CodePoints.toChars("\uD83E\uDD95".codePointAt(0)))
+    }
+
+    @Test
+    fun toCharsDestination() {
+        val chars = charArrayOf('z', 'z', 'z')
+
+        CodePoints.toChars('a'.code, chars, 0)
+        assertContentEquals(charArrayOf('a', 'z', 'z'), chars)
+
+        CodePoints.toChars('a'.code, chars, 2)
+        assertContentEquals(charArrayOf('a', 'z', 'a'), chars)
+
+        CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, 0)
+        assertContentEquals(charArrayOf('\uD83E', '\uDD95', 'a'), chars)
+
+        CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, 1)
+        assertContentEquals(charArrayOf('\uD83E', '\uD83E', '\uDD95'), chars)
+    }
+
+    @Test
+    fun toCharsDestinationTooSmall() {
+        val chars = charArrayOf()
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars('a'.code, chars, 0)
+        }
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, 0)
+        }
+    }
+
+    @Test
+    fun toCharsDestinationOffsetInvalid() {
+        val chars = charArrayOf('z', 'z')
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars('a'.code, chars, 2)
+        }
+        assertContentEquals(charArrayOf('z', 'z'), chars)
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars('a'.code, chars, -1)
+        }
+        assertContentEquals(charArrayOf('z', 'z'), chars)
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, 2)
+        }
+        assertContentEquals(charArrayOf('z', 'z'), chars)
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, -1)
+        }
+        assertContentEquals(charArrayOf('z', 'z'), chars)
+    }
+
+    @Test
+    fun toCharsDestinationOffsetTooSmall() {
+        val chars = charArrayOf('z', 'z')
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, 1)
+        }
+        assertContentEquals(charArrayOf('z', 'z'), chars)
     }
 }

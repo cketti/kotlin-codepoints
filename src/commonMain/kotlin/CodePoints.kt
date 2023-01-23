@@ -101,4 +101,20 @@ expect object CodePoints {
      * if necessary.
      */
     fun toCodePoint(highSurrogate: Char, lowSurrogate: Char): Int
+
+    /**
+     * Converts the specified character (Unicode code point) to its UTF-16 representation stored in a char array.
+     * If the specified code point is a BMP (Basic Multilingual Plane or Plane 0) value, the resulting char array has
+     * the same value as [codePoint]. If the specified code point is a supplementary code point, the resulting char
+     * array has the corresponding surrogate pair.
+     */
+    fun toChars(codePoint: Int): CharArray
+
+    /**
+     * Converts the specified character (Unicode code point) to its UTF-16 representation. If the specified code point
+     * is a BMP (Basic Multilingual Plane or Plane 0) value, the same value is stored in `destination[offset]`,
+     * and 1 is returned. If the specified code point is a supplementary character, its surrogate values are stored in
+     * `destination[offset]` (high-surrogate) and `destination[offset+1]` (low-surrogate), and 2 is returned.
+     */
+    fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int
 }
