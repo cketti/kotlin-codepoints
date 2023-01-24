@@ -24,18 +24,20 @@ Methods found in `java.lang.String`:
 * `String.codePointCount(beginIndex, endIndex)`
 * `String.offsetByCodePoints(index, codePointOffset)`
 
+Methods found in `java.lang.StringBuilder`:
+* `StringBuilder.appendCodePoint(codePoint)`
+
 Methods found in `java.lang.Character`: 
 * `CodePoints.isValidCodePoint(codePoint)`
 * `CodePoints.isBmpCodePoint(codePoint)`
 * `CodePoints.isSupplementaryCodePoint(codePoint)`
 * `CodePoints.charCount(codePoint)`
-* `CodePoints.isSurrogate(char)`
-* `CodePoints.isHighSurrogate(char)`
-* `CodePoints.isLowSurrogate(char)`
 * `CodePoints.isSurrogatePair(highSurrogate, lowSurrogate)`
 * `CodePoints.highSurrogate(codePoint)`
 * `CodePoints.lowSurrogate(codePoint)`
 * `CodePoints.toCodePoint(highSurrogate, lowSurrogate)`
+* `CodePoints.toChars(codePoint)`
+* `CodePoints.toChars(codePoint, destination, offset)`
 
 On the JVM the platform implementation is used. On all other platforms the 
 [implementation in this library](src/commonImplementation/kotlin) is used.
