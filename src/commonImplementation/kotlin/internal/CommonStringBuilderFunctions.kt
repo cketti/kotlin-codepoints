@@ -1,12 +1,10 @@
 package de.cketti.codepoints.internal
 
-import de.cketti.codepoints.CodePoints
-
 internal fun appendCodePoint(builder: StringBuilder, codePoint: Int) {
-    if (CodePoints.isBmpCodePoint(codePoint)) {
+    if (isBmpCodePoint(codePoint)) {
         builder.append(codePoint.toChar())
     } else {
-        builder.append(CodePoints.highSurrogate(codePoint))
-        builder.append(CodePoints.lowSurrogate(codePoint))
+        builder.append(highSurrogate(codePoint))
+        builder.append(lowSurrogate(codePoint))
     }
 }
