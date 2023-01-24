@@ -10,7 +10,7 @@ kotlin-codepoints is distributed through Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("de.cketti.unicode:kotlin-codepoints:0.2.0")
+    implementation("de.cketti.unicode:kotlin-codepoints:0.3.0")
 }
 ```
 
