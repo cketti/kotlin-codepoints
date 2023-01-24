@@ -2,6 +2,8 @@
 
 package de.cketti.codepoints
 
+import de.cketti.codepoints.internal.CommonStringFunctions
+
 actual inline fun String.codePointAt(index: Int): Int {
     return CommonStringFunctions.codePointAt(this, index)
 }

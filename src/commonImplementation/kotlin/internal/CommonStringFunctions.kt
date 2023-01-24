@@ -1,6 +1,6 @@
-package de.cketti.codepoints
+package de.cketti.codepoints.internal
 
-import de.cketti.codepoints.CommonCodePoints.toCodePoint
+import de.cketti.codepoints.internal.CommonCodePoints.toCodePoint
 
 object CommonStringFunctions {
     fun codePointAt(text: String, index: Int): Int {

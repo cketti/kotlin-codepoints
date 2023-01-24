@@ -1,4 +1,4 @@
-package de.cketti.codepoints
+package de.cketti.codepoints.internal
 
 object CommonCodePoints {
     private const val MIN_SUPPLEMENTARY_CODE_POINT = 0x10000

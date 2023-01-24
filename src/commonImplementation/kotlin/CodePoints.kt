@@ -2,6 +2,8 @@
 
 package de.cketti.codepoints
 
+import de.cketti.codepoints.internal.CommonCodePoints
+
 actual object CodePoints {
     actual inline fun isValidCodePoint(codePoint: Int): Boolean {
         return CommonCodePoints.isValidCodePoint(codePoint)

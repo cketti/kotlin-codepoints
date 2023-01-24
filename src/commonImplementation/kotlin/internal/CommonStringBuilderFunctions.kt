@@ -1,4 +1,6 @@
-package de.cketti.codepoints
+package de.cketti.codepoints.internal
+
+import de.cketti.codepoints.CodePoints
 
 object CommonStringBuilderFunctions {
     fun appendCodePoint(builder: StringBuilder, codePoint: Int) {
