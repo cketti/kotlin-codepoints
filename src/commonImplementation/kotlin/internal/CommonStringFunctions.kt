@@ -1,6 +1,6 @@
 package de.cketti.codepoints.internal
 
-fun codePointAt(text: String, index: Int): Int {
+internal fun codePointAt(text: String, index: Int): Int {
     if (index !in text.indices) throw IndexOutOfBoundsException()
 
     val firstChar = text[index]
@@ -14,7 +14,7 @@ fun codePointAt(text: String, index: Int): Int {
     return firstChar.code
 }
 
-fun codePointBefore(text: String, index: Int): Int {
+internal fun codePointBefore(text: String, index: Int): Int {
     val startIndex = index - 1
     if (startIndex !in text.indices) throw IndexOutOfBoundsException()
 
@@ -29,7 +29,7 @@ fun codePointBefore(text: String, index: Int): Int {
     return firstChar.code
 }
 
-fun codePointCount(text: String, beginIndex: Int, endIndex: Int): Int {
+internal fun codePointCount(text: String, beginIndex: Int, endIndex: Int): Int {
     if (beginIndex < 0 || endIndex > text.length || beginIndex > endIndex) throw IndexOutOfBoundsException()
     
     var index = beginIndex
@@ -50,7 +50,7 @@ fun codePointCount(text: String, beginIndex: Int, endIndex: Int): Int {
     return count
 }
 
-fun offsetByCodePoints(text: String, index: Int, codePointOffset: Int): Int {
+internal fun offsetByCodePoints(text: String, index: Int, codePointOffset: Int): Int {
     if (index !in 0..text.length) throw IndexOutOfBoundsException()
     if (codePointOffset == 0) return index
 

@@ -13,23 +13,23 @@ import de.cketti.codepoints.internal.toChars as commonToChars
 import de.cketti.codepoints.internal.toCodePoint as commonToCodePoint
 
 actual object CodePoints {
-    actual inline fun isValidCodePoint(codePoint: Int): Boolean {
+    actual fun isValidCodePoint(codePoint: Int): Boolean {
         return commonIsValidCodePoint(codePoint)
     }
 
-    actual inline fun isBmpCodePoint(codePoint: Int): Boolean {
+    actual fun isBmpCodePoint(codePoint: Int): Boolean {
         return commonIsBmpCodePoint(codePoint)
     }
     
-    actual inline fun isSupplementaryCodePoint(codePoint: Int): Boolean {
+    actual fun isSupplementaryCodePoint(codePoint: Int): Boolean {
         return commonIsSupplementaryCodePoint(codePoint)
     }
 
-    actual inline fun charCount(codePoint: Int): Int {
+    actual fun charCount(codePoint: Int): Int {
         return commonCharCount(codePoint)
     }
 
-    actual inline fun isSurrogatePair(highSurrogate: Char, lowSurrogate: Char): Boolean {
+    actual fun isSurrogatePair(highSurrogate: Char, lowSurrogate: Char): Boolean {
         return commonIsSurrogatePair(highSurrogate, lowSurrogate)
     }
 
@@ -41,15 +41,15 @@ actual object CodePoints {
         return commonLowSurrogate(codePoint)
     }
 
-    actual inline fun toCodePoint(highSurrogate: Char, lowSurrogate: Char): Int {
+    actual fun toCodePoint(highSurrogate: Char, lowSurrogate: Char): Int {
         return commonToCodePoint(highSurrogate, lowSurrogate)
     }
 
-    actual inline fun toChars(codePoint: Int): CharArray {
+    actual fun toChars(codePoint: Int): CharArray {
         return commonToChars(codePoint)
     }
 
-    actual inline fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int {
+    actual fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int {
         return commonToChars(codePoint, destination, offset)
     }
 }

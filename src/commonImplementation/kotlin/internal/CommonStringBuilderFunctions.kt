@@ -2,7 +2,7 @@ package de.cketti.codepoints.internal
 
 import de.cketti.codepoints.CodePoints
 
-fun appendCodePoint(builder: StringBuilder, codePoint: Int) {
+internal fun appendCodePoint(builder: StringBuilder, codePoint: Int) {
     if (CodePoints.isBmpCodePoint(codePoint)) {
         builder.append(codePoint.toChar())
     } else {
