@@ -2,20 +2,23 @@
 
 package de.cketti.codepoints
 
-import de.cketti.codepoints.internal.CommonStringFunctions
+import de.cketti.codepoints.internal.codePointAt as commonCodePointAt
+import de.cketti.codepoints.internal.codePointBefore as commonCodePointBefore
+import de.cketti.codepoints.internal.codePointCount as commonCodePointCount
+import de.cketti.codepoints.internal.offsetByCodePoints as commonOffsetByCodePoints
 
 actual inline fun String.codePointAt(index: Int): Int {
-    return CommonStringFunctions.codePointAt(this, index)
+    return commonCodePointAt(this, index)
 }
 
 actual inline fun String.codePointBefore(index: Int): Int {
-    return CommonStringFunctions.codePointBefore(this, index)
+    return commonCodePointBefore(this, index)
 }
 
 actual inline fun String.codePointCount(beginIndex: Int, endIndex: Int): Int {
-    return CommonStringFunctions.codePointCount(this, beginIndex, endIndex)
+    return commonCodePointCount(this, beginIndex, endIndex)
 }
 
 actual inline fun String.offsetByCodePoints(index: Int, codePointOffset: Int): Int {
-    return CommonStringFunctions.offsetByCodePoints(this, index, codePointOffset)
+    return commonOffsetByCodePoints(this, index, codePointOffset)
 }
