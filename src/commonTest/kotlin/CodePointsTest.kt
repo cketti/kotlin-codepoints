@@ -140,7 +140,8 @@ class CodePointsTest {
         assertFailsWith<IndexOutOfBoundsException> {
             CodePoints.toChars("\uD83E\uDD95".codePointAt(0), chars, -1)
         }
-        assertContentEquals(charArrayOf('z', 'z'), chars)
+        // We're bug-compatible with the Java stdlib implementation 
+        assertContentEquals(charArrayOf('\uDD95', 'z'), chars)
     }
 
     @Test

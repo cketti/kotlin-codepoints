@@ -2,6 +2,7 @@ package de.cketti.codepoints
 
 import kotlin.test.assertEquals
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 
 class StringExtensionsTest {
     @Test
@@ -119,5 +120,35 @@ class StringExtensionsTest {
         assertEquals(2, "\uD83E\uDD95\uD83E\uDD96".offsetByCodePoints(index = 3, codePointOffset = -1))
         assertEquals(0, "\uD83E\uDD95\uD83E\uDD96".offsetByCodePoints(index = 3, codePointOffset = -2))
         assertEquals(0, "\uD83E\uDD95\uD83E\uDD96".offsetByCodePoints(index = 1, codePointOffset = -1))
+    }
+
+    @Test
+    fun offsetByCodePoints_with_invalid_index() {
+        assertFailsWith<IndexOutOfBoundsException> {
+            "a".offsetByCodePoints(index = -1, codePointOffset = 0)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            "a".offsetByCodePoints(index = 2, codePointOffset = 0)
+        }
+    }
+
+    @Test
+    fun offsetByCodePoints_with_invalid_codePointOffset() {
+        assertFailsWith<IndexOutOfBoundsException> {
+            "a".offsetByCodePoints(index = 0, codePointOffset = 2)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            "a".offsetByCodePoints(index = 1, codePointOffset = -2)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            "\uD83E\uDD95".offsetByCodePoints(index = 0, codePointOffset = 2)
+        }
+
+        assertFailsWith<IndexOutOfBoundsException> {
+            "\uD83E\uDD95".offsetByCodePoints(index = 2, codePointOffset = -2)
+        }
     }
 }
