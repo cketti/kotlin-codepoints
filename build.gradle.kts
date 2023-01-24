@@ -28,9 +28,6 @@ kotlin {
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
         }
-        testRuns["test"].executionTask.configure {
-            useJUnitPlatform()
-        }
     }
 
     linuxArm64()
@@ -66,10 +63,6 @@ kotlin {
 
         val commonImplementation by creating {
             dependsOn(commonMain)
-        }
-
-        val jvmTest by getting {
-            dependsOn(commonImplementation)
         }
     }
 
