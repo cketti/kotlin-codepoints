@@ -54,19 +54,24 @@ object CommonCodePoints {
     }
 
     fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int {
-        val size = destination.size
-        if (offset >= 0) {
-            if (isBmpCodePoint(codePoint)) {
-                if (offset < size) {
-                    destination[offset] = codePoint.toChar()
-                    return 1
-                }
-            } else if (offset < size - 1) {
-                destination[offset] = highSurrogate(codePoint)
-                destination[offset + 1] = lowSurrogate(codePoint)
-                return 2
-            }
+        if (isBmpCodePoint(codePoint)) {
+            destination.setSafe(offset, codePoint.toChar())
+            return 1
+        } else {
+            // When writing the low surrogate succeeds but writing the high surrogate fails (offset = -1), the 
+            // destination will be modified even though the method throws. This feels wrong, but matches the behavior
+            // of the Java stdlib implementation.
+            destination.setSafe(offset + 1, lowSurrogate(codePoint))
+            destination.setSafe(offset, highSurrogate(codePoint))
+            return 2
         }
-        throw IndexOutOfBoundsException("Size: $size, offset: $offset")
+    }
+    
+    private fun CharArray.setSafe(index: Int, value: Char) {
+        if (index !in this.indices) {
+            throw IndexOutOfBoundsException("Size: $size, offset: $index")
+        }
+
+        this[index] = value
     }
 }
