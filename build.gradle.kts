@@ -30,8 +30,10 @@ kotlin {
         }
     }
 
-    linuxArm64()
     linuxArm32Hfp()
+    linuxArm64()
+    linuxMips32()
+    linuxMipsel32()
     linuxX64()
 
     macosX64()
@@ -71,4 +73,11 @@ kotlin {
             it.compilations.getByName("main").source(sourceSets.getByName("commonImplementation"))
         }
     }
+}
+
+tasks.create("publishMips") {
+    dependsOn(
+        "publishLinuxMips32PublicationToMavenCentralRepository",
+        "publishLinuxMipsel32PublicationToMavenCentralRepository"
+    )
 }
