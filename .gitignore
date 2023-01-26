@@ -60,3 +60,6 @@ hs_err_pid*
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle/wrapper/gradle-wrapper.jar
+
+# Avoid MacOS specific stuff
+.DS_Store
