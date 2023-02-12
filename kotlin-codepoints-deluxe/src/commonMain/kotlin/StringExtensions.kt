@@ -45,6 +45,6 @@ fun String.codePointSequence(): CodePointSequence {
 /**
  * Iterator for [CodePoint]s in this string.
  */
-fun String.codePointIterator(): CodePointIterator {
-    return CodePointIterator(this)
+fun String.codePointIterator(startIndex: Int = 0, endIndex: Int = length): CodePointIterator {
+    return CodePointIterator(this, startIndex, endIndex)
 }
