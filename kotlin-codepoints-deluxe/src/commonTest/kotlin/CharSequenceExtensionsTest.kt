@@ -3,7 +3,7 @@ package de.cketti.codepoints.deluxe
 import kotlin.test.assertEquals
 import kotlin.test.Test
 
-class StringExtensionsTest {
+class CharSequenceExtensionsTest {
     @Test
     fun codePointAt() {
         assertEquals('a'.toCodePoint(), "a".codePointAt(0))

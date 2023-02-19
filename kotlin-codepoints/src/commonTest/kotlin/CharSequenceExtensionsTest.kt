@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
-class StringExtensionsTest {
+class CharSequenceExtensionsTest {
     @Test
     fun codePointAt() {
         assertEquals('a'.code, "a".codePointAt(0))
