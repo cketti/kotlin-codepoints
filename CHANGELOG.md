@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0] - 2023-02-19
+### Changed
+- Added support for iterating over parts of a string when using `CodePointIterator`
+
+### Added
+- Added `StringBuilder.appendCodePoint()` to `kotlin-codepoints-deluxe`
+
 ## [0.4.0] - 2023-01-31
 ### Changed
 - `CodePoints.toChars(Int, CharArray, Int)` is now bug-compatible with `java.lang.Character.toChars(int, char[], int)`. 
