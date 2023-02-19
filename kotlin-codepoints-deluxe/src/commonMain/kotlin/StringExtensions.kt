@@ -10,41 +10,44 @@ import de.cketti.codepoints.codePointBefore as intCodePointBefore
 /**
  * Returns the Unicode code point at the specified index.
  *
- * The `index` parameter is the regular `String` index, i.e. the number of `Char`s from the start of the string.
+ * The `index` parameter is the regular `CharSequence` index, i.e. the number of `Char`s from the start of the character
+ * sequence.
  *
- * If the `index` is out of bounds of this string, this method throws an [IndexOutOfBoundsException].
+ * If the `index` is out of bounds of this character sequence, this method throws an [IndexOutOfBoundsException].
  * 
  * See [codePointAt][intCodePointAt].
  * ```
  */
 @kotlin.internal.HidesMembers
-fun String.codePointAt(index: Int): CodePoint {
+fun CharSequence.codePointAt(index: Int): CodePoint {
     return intCodePointAt(index).toCodePoint()
 }
 
 /**
  * Returns the Unicode code point before the specified index.
  *
- * The `index` parameter is the regular `String` index, i.e. the number of `Char`s from the start of the string.
+ * The `index` parameter is the regular `CharSequence` index, i.e. the number of `Char`s from the start of the character
+ * sequence.
  *
- * If the value `index - 1` is out of bounds of this string, this method throws an [IndexOutOfBoundsException].
+ * If the value `index - 1` is out of bounds of this character sequence, this method throws an
+ * [IndexOutOfBoundsException].
  * 
  * See [codePointBefore][intCodePointBefore].
  */
-fun String.codePointBefore(index: Int): CodePoint {
+fun CharSequence.codePointBefore(index: Int): CodePoint {
     return intCodePointBefore(index).toCodePoint()
 }
 
 /**
- * Sequence of [CodePoint]s in this string.
+ * Sequence of [CodePoint]s in this character sequence.
  */
-fun String.codePointSequence(): CodePointSequence {
+fun CharSequence.codePointSequence(): CodePointSequence {
     return CodePointSequence(this)
 }
 
 /**
- * Iterator for [CodePoint]s in this string.
+ * Iterator for [CodePoint]s in this character sequence.
  */
-fun String.codePointIterator(startIndex: Int = 0, endIndex: Int = length): CodePointIterator {
+fun CharSequence.codePointIterator(startIndex: Int = 0, endIndex: Int = length): CodePointIterator {
     return CodePointIterator(this, startIndex, endIndex)
 }
