@@ -3,23 +3,23 @@ package de.cketti.codepoints.deluxe
 import kotlin.jvm.JvmInline
 
 /**
- * Sequence of [CodePoint]s in the given [String].
+ * Sequence of [CodePoint]s in the given [CharSequence].
  */
 @JvmInline
-value class CodePointSequence(private val text: String) : Sequence<CodePoint> {
+value class CodePointSequence(private val text: CharSequence) : Sequence<CodePoint> {
     override fun iterator(): CodePointIterator {
         return text.codePointIterator()
     }
 }
 
 /**
- * Iterator for [CodePoint]s in the given [String].
+ * Iterator for [CodePoint]s in the given [CharSequence].
  * 
- * The `startIndex` and `endIndex` parameters are the regular `String` indices, i.e. the number of `Char`s from the 
- * start of the string.
+ * The `startIndex` and `endIndex` parameters are the regular `CharSequence` indices, i.e. the number of `Char`s from 
+ * the start of the character sequence.
  */
 class CodePointIterator(
-    private val text: String,
+    private val text: CharSequence,
     startIndex: Int,
     private val endIndex: Int
 ) : Iterator<CodePoint> {
