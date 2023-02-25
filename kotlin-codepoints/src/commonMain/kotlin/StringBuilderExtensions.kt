@@ -1,17 +1,22 @@
-@file:Suppress(
-    "EXTENSION_SHADOWED_BY_MEMBER", // Kotlin/JVM aliases StringBuilder to j.l.StringBuilder.
-    "KotlinRedundantDiagnosticSuppress", // Above suppression only needed for JVM.
-)
-
 package de.cketti.codepoints
 
+import de.cketti.codepoints.CodePoints.highSurrogate
+import de.cketti.codepoints.CodePoints.isBmpCodePoint
+import de.cketti.codepoints.CodePoints.lowSurrogate
+
 /**
- * Appends the string representation of the [codePoint] argument to this sequence.
+ * Appends the string representation of the [codePoint] argument to this Appendable and returns this instance.
  *
- * The argument is appended to the contents of this sequence.
- * The length of this sequence increases by [CodePoints.charCount].
+ * To append the codepoint, [Appendable.append(Char)][Appendable.append] is called [CodePoints.charCount] times.
  *
  * The overall effect is exactly as if the argument were converted to a char array by the function
- * [CodePoints.toChars] and the characters in that array were then appended to this sequence.
+ * [CodePoints.toChars] and the characters in that array were then appended to this Appendable.
  */
-expect fun StringBuilder.appendCodePoint(codePoint: Int): StringBuilder
+fun <T : Appendable> T.appendCodePoint(codePoint: Int): T = apply {
+    if (isBmpCodePoint(codePoint)) {
+        append(codePoint.toChar())
+    } else {
+        append(highSurrogate(codePoint))
+        append(lowSurrogate(codePoint))
+    }
+}
