@@ -1,19 +1,18 @@
-package de.cketti.codepoints.deluxe
+package de.cketti.codepoints
 
 import kotlin.test.assertEquals
 import kotlin.test.Test
 
-class StringBuilderExtensionsTest {
+class AppendableExtensionsTest {
     @Test
     fun appendCodePoint() {
         val actual = buildString {
-            appendCodePoint('a'.toCodePoint())
+            appendCodePoint('a'.code)
             append('b')
-            appendCodePoint('\uFFFF'.toCodePoint())
+            appendCodePoint("\uFFFF".codePointAt(0))
             append('c')
             appendCodePoint("\uD83E\uDD95".codePointAt(0))
         }
-        
         assertEquals("ab\uFFFFc\uD83E\uDD95", actual)
     }
 }
