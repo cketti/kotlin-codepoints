@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0] - 2023-03-05
+### Changed
+- Use `CharSequence` extension functions instead of `String` extension functions in both `kotlin-codepoints` and
+  `kotlin-codepoints-deluxe`.
+- Change `StringBuilder.appendCodePoint()` to `Appendable.appendCodePoint()` in both `kotlin-codepoints` and
+  `kotlin-codepoints-deluxe`.
+
 ## [0.5.0] - 2023-02-19
 ### Changed
 - Added support for iterating over parts of a string when using `CodePointIterator`

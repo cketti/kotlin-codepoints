@@ -11,12 +11,12 @@ kotlin-codepoints is distributed through Maven Central.
 ```kotlin
 dependencies {
     // Basic API
-    implementation("de.cketti.unicode:kotlin-codepoints:0.5.0")
+    implementation("de.cketti.unicode:kotlin-codepoints:0.6.0")
 
     // or
     
     // Nice API
-    implementation("de.cketti.unicode:kotlin-codepoints-deluxe:0.5.0")
+    implementation("de.cketti.unicode:kotlin-codepoints-deluxe:0.6.0")
 }
 ```
 
@@ -27,13 +27,13 @@ dependencies {
 This library aims to make some methods of the Java standard library available to Kotlin multiplatform projects.
 
 Methods found in `java.lang.String`:
-* `String.codePointAt(index)`
-* `String.codePointBefore(index)`
-* `String.codePointCount(beginIndex, endIndex)`
-* `String.offsetByCodePoints(index, codePointOffset)`
+* `CharSequence.codePointAt(index)`
+* `CharSequence.codePointBefore(index)`
+* `CharSequence.codePointCount(beginIndex, endIndex)`
+* `CharSequence.offsetByCodePoints(index, codePointOffset)`
 
 Methods found in `java.lang.StringBuilder`:
-* `StringBuilder.appendCodePoint(codePoint)`
+* `Appendable.appendCodePoint(codePoint)`
 
 Methods found in `java.lang.Character`: 
 * `CodePoints.isValidCodePoint(codePoint)`
@@ -47,7 +47,7 @@ Methods found in `java.lang.Character`:
 * `CodePoints.toChars(codePoint)`
 * `CodePoints.toChars(codePoint, destination, offset)`
 
-On the JVM the platform implementation is used. On all other platforms the 
+On the JVM the platform implementation (`java.lang.Character.*`) is used. On all other platforms the 
 [implementation in this library](src/commonImplementation/kotlin) is used.
 
 ### kotlin-codepoints-deluxe
