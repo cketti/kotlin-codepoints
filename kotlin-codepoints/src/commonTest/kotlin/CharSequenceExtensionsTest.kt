@@ -61,6 +61,9 @@ class CharSequenceExtensionsTest {
 
     @Test
     fun codePointCount() {
+        assertEquals(0, "".codePointCount(beginIndex = 0, endIndex = 0))
+        assertEquals(0, "abc".codePointCount(beginIndex = 1, endIndex = 1))
+
         assertEquals(3, "abc".codePointCount(beginIndex = 0, endIndex = 3))
         assertEquals(2, "a\uFFFF".codePointCount(beginIndex = 0, endIndex = 2))
         assertEquals(1, "\uD83E\uDD95".codePointCount(beginIndex = 0, endIndex = 2))
