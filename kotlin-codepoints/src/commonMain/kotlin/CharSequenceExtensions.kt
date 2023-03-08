@@ -91,7 +91,7 @@ fun CharSequence.codePointCount(beginIndex: Int, endIndex: Int): Int {
 
     var index = beginIndex
     var count = 0
-    do {
+    while (index < endIndex) {
         val firstChar = this[index]
         index++
         if (firstChar.isHighSurrogate() && index < endIndex) {
@@ -102,7 +102,7 @@ fun CharSequence.codePointCount(beginIndex: Int, endIndex: Int): Int {
         }
 
         count++
-    } while (index < endIndex)
+    }
 
     return count
 }
