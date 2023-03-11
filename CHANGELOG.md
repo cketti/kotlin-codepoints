@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.1] - 2023-03-11
+### Fixed
+- `CharSequence.codePointCount()` now returns the correct result for a zero-length range.
+
 ## [0.6.0] - 2023-03-05
 ### Changed
 - Use `CharSequence` extension functions instead of `String` extension functions in both `kotlin-codepoints` and
