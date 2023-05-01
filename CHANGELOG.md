@@ -1,5 +1,10 @@
 # Changelog
 
+## [unreleased]
+### Added
+- Added `StringBuilder.setCodePointAt()`, `StringBuilder.insertCodePointAt()`, and `StringBuilder.deleteCodePointAt()` 
+  to both `kotlin-codepoints` and `kotlin-codepoints-deluxe`.
+
 ## [0.6.1] - 2023-03-11
 ### Fixed
 - `CharSequence.codePointCount()` now returns the correct result for a zero-length range.
