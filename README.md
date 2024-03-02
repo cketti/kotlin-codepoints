@@ -11,12 +11,12 @@ kotlin-codepoints is distributed through Maven Central.
 ```kotlin
 dependencies {
     // Basic API
-    implementation("de.cketti.unicode:kotlin-codepoints:0.6.1")
+    implementation("de.cketti.unicode:kotlin-codepoints:0.7.0")
 
     // or
     
     // Nice API
-    implementation("de.cketti.unicode:kotlin-codepoints-deluxe:0.6.1")
+    implementation("de.cketti.unicode:kotlin-codepoints-deluxe:0.7.0")
 }
 ```
 

@@ -1,9 +1,14 @@
 # Changelog
 
-## [unreleased]
+## [0.7.0] - 2024-03-02
 ### Added
 - Added `StringBuilder.setCodePointAt()`, `StringBuilder.insertCodePointAt()`, and `StringBuilder.deleteCodePointAt()` 
   to both `kotlin-codepoints` and `kotlin-codepoints-deluxe`.
+- Added support for wasmJs and wasmWasi targets.
+
+### Removed
+- Removed targets no longer supported by Kotlin 1.9.20+ (iosArm32, linuxArm32Hfp, linuxMips32, linuxMipsel32, mingwX86,
+  wasm32, watchosX86).
 
 ## [0.6.1] - 2023-03-11
 ### Fixed
