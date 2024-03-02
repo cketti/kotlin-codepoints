@@ -11,7 +11,6 @@ kotlin {
     androidNativeX86()
     androidNativeX64()
 
-    iosArm32()
     iosArm64()
     iosX64()
     iosSimulatorArm64()
@@ -26,28 +25,26 @@ kotlin {
         }
     }
 
-    linuxArm32Hfp()
     linuxArm64()
-    linuxMips32()
-    linuxMipsel32()
     linuxX64()
 
     macosX64()
     macosArm64()
 
     mingwX64()
-    mingwX86()
 
     tvosArm64()
     tvosX64()
     tvosSimulatorArm64()
 
-    wasm32()
+    @Suppress("OPT_IN_USAGE")
+    wasmJs()
+    @Suppress("OPT_IN_USAGE")
+    wasmWasi()
 
     watchosArm32()
     watchosArm64()
     watchosDeviceArm64()
-    watchosX86()
     watchosX64()
     watchosSimulatorArm64()
 
@@ -77,11 +74,4 @@ mavenPublishing {
         name.set("kotlin-codepoint")
         description.set("Kotlin Multiplatform (KMP) library that adds basic support for Unicode code points.")
     }
-}
-
-tasks.create("publishMips") {
-    dependsOn(
-        "publishLinuxMips32PublicationToMavenCentralRepository",
-        "publishLinuxMipsel32PublicationToMavenCentralRepository"
-    )
 }
