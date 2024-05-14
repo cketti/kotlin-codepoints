@@ -55,14 +55,14 @@ kotlin {
             }
         }
 
-        val commonImplementation by creating {
+        val nonJvmMain by creating {
             dependsOn(commonMain.get())
         }
     }
 
     targets.onEach {
         if (it.platformType != KotlinPlatformType.jvm) {
-            it.compilations.getByName("main").source(sourceSets.getByName("commonImplementation"))
+            it.compilations.getByName("main").source(sourceSets.getByName("nonJvmMain"))
         }
     }
 }
