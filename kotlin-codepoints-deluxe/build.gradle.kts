@@ -17,6 +17,10 @@ kotlin {
         browser {}
     }
 
+    wasmJs {
+        browser()
+    }
+
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
