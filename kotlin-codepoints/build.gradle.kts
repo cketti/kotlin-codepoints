@@ -49,15 +49,14 @@ kotlin {
     watchosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
 
         val commonImplementation by creating {
-            dependsOn(commonMain)
+            dependsOn(commonMain.get())
         }
     }
 
