@@ -48,16 +48,17 @@ kotlin {
     watchosX64()
     watchosSimulatorArm64()
 
+    applyDefaultHierarchyTemplate()
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+        commonMain {}
+        commonTest {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
 
         val commonImplementation by creating {
-            dependsOn(commonMain)
+            dependsOn(commonMain.get())
         }
     }
 
