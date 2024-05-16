@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -48,22 +48,20 @@ kotlin {
     watchosX64()
     watchosSimulatorArm64()
 
-    sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-
-        val commonImplementation by creating {
-            dependsOn(commonMain)
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        group("nonJvm") {
+            withJs()
+            withNative()
+            withWasm()
         }
     }
 
-    targets.onEach {
-        if (it.platformType != KotlinPlatformType.jvm) {
-            it.compilations.getByName("main").source(sourceSets.getByName("commonImplementation"))
+    sourceSets {
+        commonTest {
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
     }
 }
