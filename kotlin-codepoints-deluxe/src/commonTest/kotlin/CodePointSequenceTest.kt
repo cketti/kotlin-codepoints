@@ -13,6 +13,14 @@ class CodePointSequenceTest {
         
         assertEquals(listOf(0x0061, 0x1F995, 0x0062, 0x1F996, 0x0063), codePoints)
     }
+    
+    @Test
+    fun codePointSequence_with_start_and_end_index() {
+        val codePoints = "a\uD83E\uDD95b\uD83E\uDD96c".codePointSequence(startIndex = 1, endIndex = 6)
+            .map { it.value }.toList()
+        
+        assertEquals(listOf(0x1F995, 0x0062, 0x1F996), codePoints)
+    }
 
     @Test
     fun codePointIterator() {

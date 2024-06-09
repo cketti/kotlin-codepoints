@@ -46,6 +46,17 @@ fun CharSequence.codePointSequence(): CodePointSequence {
 }
 
 /**
+ * Sequence of [CodePoint]s in the subsequence of this character sequence, starting at the specified `startIndex`
+ * and ending right before the specified `endIndex`.
+ *
+ * The `startIndex` and `endIndex` parameters are the regular `CharSequence` indices, i.e. the number of `Char`s from
+ * the start of the character sequence.
+ */
+fun CharSequence.codePointSequence(startIndex: Int = 0, endIndex: Int = length): CodePointSequence {
+    return CodePointSequence(subSequence(startIndex, endIndex))
+}
+
+/**
  * Iterator for [CodePoint]s in this character sequence.
  */
 fun CharSequence.codePointIterator(startIndex: Int = 0, endIndex: Int = length): CodePointIterator {
