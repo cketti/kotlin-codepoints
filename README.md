@@ -64,7 +64,7 @@ to get and idea of what's available.
 val text = "🦕&🦖"
 
 for (codePoint in text.codePointSequence()) {
-    print("code point: $codePoint, char count: ${codePoint.charCount}")
+    print("code point: ${codePoint.toUnicodeNotation()}, char count: ${codePoint.charCount}")
 
     if (codePoint.isBasic) {
         println(" - boring!")

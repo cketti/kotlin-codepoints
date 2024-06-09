@@ -102,13 +102,22 @@ value class CodePoint internal constructor(val value: Int) {
     }
 
     /**
-     * Returns a string representation of this code point.
+     * Returns the standard Unicode notation of this code point.
      * 
      * "U+" followed by the code point value in hexadecimal (using upper case letters), which is prepended with leading
      * zeros to a minimum of four digits.
      */
-    override fun toString(): String {
+    fun toUnicodeNotation(): String {
         return "U+${value.toString(16).uppercase().padStart(4, '0')}"
+    }
+
+    /**
+     * Returns the string representation of this code point.
+     * 
+     * The returned string consists of the sequence of characters returned by [toChars].
+     */
+    override fun toString(): String {
+        return toChars().concatToString()
     }
 }
 
