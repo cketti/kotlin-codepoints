@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -19,11 +21,7 @@ kotlin {
         browser {}
     }
 
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
+    jvm()
 
     linuxArm64()
     linuxX64()
@@ -50,10 +48,14 @@ kotlin {
 
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     applyDefaultHierarchyTemplate {
-        group("nonJvm") {
-            withJs()
-            withNative()
-            withWasm()
+        common {
+            withJvm()
+            group("nonJvm") {
+                withJs()
+                withNative()
+                withWasmJs()
+                withWasmWasi()
+            }
         }
     }
 
@@ -64,6 +66,10 @@ kotlin {
             }
         }
     }
+}
+
+tasks.withType<KotlinJvmCompile> {
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
 }
 
 @Suppress("UnstableApiUsage")

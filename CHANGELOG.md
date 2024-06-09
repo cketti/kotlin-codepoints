@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Changed
+- Updated to Kotlin 2.0.0
+
 ## [0.7.0] - 2024-03-02
 ### Added
 - Added `StringBuilder.setCodePointAt()`, `StringBuilder.insertCodePointAt()`, and `StringBuilder.deleteCodePointAt()` 

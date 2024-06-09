@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.vanniktech.maven.publish)
@@ -17,11 +20,7 @@ kotlin {
         browser {}
     }
 
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
+    jvm()
 
     linuxArm64()
     linuxX64()
@@ -59,6 +58,10 @@ kotlin {
             }
         }
     }
+}
+
+tasks.withType<KotlinJvmCompile> {
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
 }
 
 @Suppress("UnstableApiUsage")
