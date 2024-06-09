@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.8.0] - 2024-06-09
 ### Changed
 - Updated to Kotlin 2.0.0
 
