@@ -61,12 +61,17 @@ class CharSequenceExtensionsTest {
 
     @Test
     fun codePointCount() {
+        assertEquals(0, "".codePointCount())
         assertEquals(0, "".codePointCount(beginIndex = 0, endIndex = 0))
         assertEquals(0, "abc".codePointCount(beginIndex = 1, endIndex = 1))
 
+        assertEquals(3, "abc".codePointCount())
         assertEquals(3, "abc".codePointCount(beginIndex = 0, endIndex = 3))
+        assertEquals(2, "a\uFFFF".codePointCount())
         assertEquals(2, "a\uFFFF".codePointCount(beginIndex = 0, endIndex = 2))
+        assertEquals(1, "\uD83E\uDD95".codePointCount())
         assertEquals(1, "\uD83E\uDD95".codePointCount(beginIndex = 0, endIndex = 2))
+        assertEquals(2, "\uD83E\uDD95\uD83E\uDD96".codePointCount())
         assertEquals(2, "\uD83E\uDD95\uD83E\uDD96".codePointCount(beginIndex = 0, endIndex = 4))
 
         assertEquals(2, "abc".codePointCount(beginIndex = 1, endIndex = 3))
@@ -80,7 +85,9 @@ class CharSequenceExtensionsTest {
 
     @Test
     fun codePointCount_with_unmatched_surrogates() {
+        assertEquals(2, "\uDD95\uD83E".codePointCount())
         assertEquals(2, "\uDD95\uD83E".codePointCount(beginIndex = 0, endIndex = 2))
+        assertEquals(3, "\uDD95\uD83E\uDD95\uD83E".codePointCount())
         assertEquals(3, "\uDD95\uD83E\uDD95\uD83E".codePointCount(beginIndex = 0, endIndex = 4))
 
         assertEquals(1, "\uDD95\uD83E".codePointCount(beginIndex = 1, endIndex = 2))

@@ -77,6 +77,13 @@ fun CharSequence.codePointBefore(index: Int): Int {
 }
 
 /**
+ * Returns the number of Unicode code points in this `CharSequence`.
+ */
+fun CharSequence.codePointCount(): Int {
+    return codePointCount(beginIndex = 0, endIndex = length)
+}
+
+/**
  * Returns the number of Unicode code points in the specified text range of this `CharSequence`.
  * 
  * The text range begins at the specified `beginIndex` and extends to the `Char` at index `endIndex - 1`. Thus, the 
