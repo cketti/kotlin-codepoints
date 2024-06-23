@@ -153,4 +153,17 @@ class CodePointsTest {
         }
         assertContentEquals(charArrayOf('z', 'z'), chars)
     }
+
+    @Test
+    fun toString_test() {
+        assertEquals("", CodePoints.toString(*intArrayOf()))
+        assertEquals("a", CodePoints.toString('a'.code))
+        assertEquals("\uD83E\uDD95", CodePoints.toString(0x1F995))
+        assertEquals("\uD83E\uDD95", CodePoints.toString(0xD83E, 0xDD95))
+        assertEquals("a\uD83E\uDD95z", CodePoints.toString('a'.code, 0x1F995, 'z'.code))
+        
+        assertFailsWith<IllegalArgumentException> {  
+            CodePoints.toString('a'.code, 0x110000)
+        }
+    }
 }

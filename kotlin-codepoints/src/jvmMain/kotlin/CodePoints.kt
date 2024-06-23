@@ -42,4 +42,8 @@ actual object CodePoints {
     actual inline fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int {
         return Character.toChars(codePoint, destination, offset)
     }
+    
+    actual inline fun toString(vararg codePoints: Int): String {
+        return String(codePoints, offset = 0, length = codePoints.size)
+    }
 }
