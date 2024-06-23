@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+### Changed
+- `CodePoint.toString()` now returns the string representation of a code point.
+
+### Added
+- `CodePoint.toUnicodeNotation()` returns the standard Unicode notation of a code point, e.g. `U+1F4E7`. 
+
 ## [0.8.0] - 2024-06-09
 ### Changed
 - Updated to Kotlin 2.0.0

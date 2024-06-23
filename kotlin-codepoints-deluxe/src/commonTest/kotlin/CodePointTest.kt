@@ -165,4 +165,19 @@ class CodePointTest {
         }
         assertContentEquals(charArrayOf('z', 'z'), chars)
     }
+
+    @Test
+    fun toUnicodeNotation() {
+        assertEquals("U+0000", 0.toCodePoint().toUnicodeNotation())
+        assertEquals("U+0061", 'a'.toCodePoint().toUnicodeNotation())
+        assertEquals("U+0FFF", 0xFFF.toCodePoint().toUnicodeNotation())
+        assertEquals("U+FFFF", 0xFFFF.toCodePoint().toUnicodeNotation())
+        assertEquals("U+1F995", 0x1F995.toCodePoint().toUnicodeNotation())
+    }
+
+    @Test
+    fun toString_test() {
+        assertEquals("a", 'a'.toCodePoint().toString())
+        assertEquals("\uD83E\uDD95", 0x1F995.toCodePoint().toString())
+    }
 }
