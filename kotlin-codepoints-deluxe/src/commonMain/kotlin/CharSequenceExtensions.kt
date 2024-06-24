@@ -6,6 +6,8 @@ package de.cketti.codepoints.deluxe
 
 import de.cketti.codepoints.codePointAt as intCodePointAt
 import de.cketti.codepoints.codePointBefore as intCodePointBefore
+import de.cketti.codepoints.forEachCodePoint as intForEachCodePoint
+import de.cketti.codepoints.forEachCodePointIndexed as intForEachCodePointIndexed
 
 /**
  * Returns the Unicode code point at the specified index.
@@ -50,4 +52,25 @@ fun CharSequence.codePointSequence(): CodePointSequence {
  */
 fun CharSequence.codePointIterator(startIndex: Int = 0, endIndex: Int = length): CodePointIterator {
     return CodePointIterator(this, startIndex, endIndex)
+}
+
+/**
+ * Performs the given [action] for each code point in this character sequence.
+ */
+inline fun CharSequence.forEachCodePoint(action: (codePoint: CodePoint) -> Unit) {
+    intForEachCodePoint { codePoint ->
+        action(codePoint.toCodePoint())
+    }
+}
+
+/**
+ * Performs the given [action] for each code point in this character sequence.
+ *
+ * @param action The start index of the current code point is provided as the first argument to this function. The
+ *   code point as [CodePoint] instance as the second argument.
+ */
+inline fun CharSequence.forEachCodePointIndexed(action: (index: Int, codePoint: CodePoint) -> Unit) {
+    intForEachCodePointIndexed { index, codePoint ->
+        action(index, codePoint.toCodePoint())
+    }
 }

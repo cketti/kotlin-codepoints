@@ -160,3 +160,43 @@ fun CharSequence.offsetByCodePoints(index: Int, codePointOffset: Int): Int {
         return currentIndex + 1
     }
 }
+
+/**
+ * Performs the given [action] for each code point in this character sequence.
+ */
+inline fun CharSequence.forEachCodePoint(action: (codePoint: Int) -> Unit) {
+    forEachCodePointIndexed { _, codePoint ->
+        action(codePoint)
+    }
+}
+
+/**
+ * Performs the given [action] for each code point in this character sequence.
+ *
+ * @param action The start index of the current code point is provided as the first argument to this function. The code
+ *   point value as the second argument.
+ */
+inline fun CharSequence.forEachCodePointIndexed(action: (index: Int, codePoint: Int) -> Unit) {
+    var index = 0
+    val endIndex = length
+    while (index < endIndex) {
+        val codePointStartIndex = index
+
+        val firstChar = this[index]
+        index++
+
+        if (firstChar.isHighSurrogate() && index < endIndex) {
+            val nextChar = this[index]
+            if (nextChar.isLowSurrogate()) {
+                index++
+
+                val codePoint = CodePoints.toCodePoint(firstChar, nextChar)
+                action(codePointStartIndex, codePoint)
+
+                continue
+            }
+        }
+
+        action(codePointStartIndex, firstChar.code)
+    }
+}
