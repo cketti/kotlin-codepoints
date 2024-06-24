@@ -53,12 +53,12 @@ fun CharSequence.codePointAt(index: Int): Int {
  *
  * The `index` parameter is the regular `CharSequence` index, i.e. the number of `Char`s from the start of the character
  * sequence.
- * 
+ *
  * If the `Char` value at `index - 1` is in the low surrogate range and the `Char` value at `index - 2` is in the high
- * surrogate range, then the surrogate pair is decoded and the code point in one of the supplementary planes is 
+ * surrogate range, then the surrogate pair is decoded and the code point in one of the supplementary planes is
  * returned. In all other cases this method behaves like [CharSequence.get] was called with an argument of `index - 1`.
  *
- * If the value `index - 1` is out of bounds of this character sequence, this method throws an 
+ * If the value `index - 1` is out of bounds of this character sequence, this method throws an
  * [IndexOutOfBoundsException].
  */
 fun CharSequence.codePointBefore(index: Int): Int {
@@ -78,11 +78,11 @@ fun CharSequence.codePointBefore(index: Int): Int {
 
 /**
  * Returns the number of Unicode code points in the specified text range of this `CharSequence`.
- * 
- * The text range begins at the specified `beginIndex` and extends to the `Char` at index `endIndex - 1`. Thus, the 
+ *
+ * The text range begins at the specified `beginIndex` and extends to the `Char` at index `endIndex - 1`. Thus, the
  * length (in `Char`s) of the text range is `endIndex - beginIndex`. Unpaired surrogates within the text range count as
  * one code point each.
- * 
+ *
  * If `beginIndex` is negative, or `endIndex` is larger than the length of this string, or `beginIndex` is larger than
  * `endIndex`, this method throws an [IndexOutOfBoundsException].
  */
@@ -108,10 +108,10 @@ fun CharSequence.codePointCount(beginIndex: Int, endIndex: Int): Int {
 }
 
 /**
- * Returns the index within this `CharSequence` that is offset from the given `index` by `codePointOffset` code points. 
- * 
+ * Returns the index within this `CharSequence` that is offset from the given `index` by `codePointOffset` code points.
+ *
  * Unpaired surrogates within the text range given by `index` and `codePointOffset` count as one code point each.
- * 
+ *
  * If `index` is negative or larger than the length of this character sequence, or if `codePointOffset` is positive and
  * the subsequence starting with `index` has fewer than `codePointOffset` code points, or if `codePointOffset` is
  * negative and the subsequence before index has fewer than the absolute value of `codePointOffset` code points, this
@@ -151,5 +151,40 @@ fun CharSequence.offsetByCodePoints(index: Int, codePointOffset: Int): Int {
         }
 
         return currentIndex + 1
+    }
+}
+
+/**
+ * Performs given [action] for each codepoint in the [CharSequence]s.
+ *
+ * @see forEachCodePointIndexed
+ */
+inline fun CharSequence.forEachCodePoint(
+    action: (codePoint: Int) -> Unit,
+) = forEachCodePointIndexed { _, codePoint -> action(codePoint) }
+
+/**
+ * Performs given [action] for each codepoint in the [CharSequence].
+ * Provides the start index for the given codepoint
+ */
+inline fun CharSequence.forEachCodePointIndexed(
+    action: (index: Int, codePoint: Int) -> Unit,
+) {
+    val str = this
+    var index = 0
+    val endIndex = length
+    while (index < endIndex) {
+        val codePointStartIndex = index
+        val firstChar = str[index]
+        index++
+        if (firstChar.isHighSurrogate() && index < endIndex) {
+            val nextChar = str[index]
+            if (nextChar.isLowSurrogate()) {
+                action(codePointStartIndex, CodePoints.toCodePoint(firstChar, nextChar))
+                index++
+                continue
+            }
+        }
+        action(codePointStartIndex, firstChar.code)
     }
 }

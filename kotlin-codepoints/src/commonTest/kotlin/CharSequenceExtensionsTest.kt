@@ -154,4 +154,53 @@ class CharSequenceExtensionsTest {
             "\uD83E\uDD95".offsetByCodePoints(index = 2, codePointOffset = -2)
         }
     }
+
+    @Test
+    fun forEachCodepoint() {
+        fun CharSequence.collectCodepoints(): List<Int> = buildList { forEachCodePoint { add(it) } }
+
+        assertEquals(
+            emptyList(),
+            "".collectCodepoints(),
+        )
+        assertEquals(
+            listOf('a'.code),
+            "a".collectCodepoints(),
+        )
+        assertEquals(
+            listOf('a'.code, 0xFFFF),
+            "a\uFFFF".collectCodepoints(),
+        )
+        assertEquals(
+            listOf(0x1F995, 'a'.code, 0x1F996),
+            "\uD83E\uDD95a\uD83E\uDD96".collectCodepoints(),
+        )
+    }
+
+    @Test
+    fun forEachCodepointIndexed() {
+        fun CharSequence.collectCodepoints(): List<Pair<Int, Int>> =
+            buildList { forEachCodePointIndexed { index, codepoint -> add(index to codepoint) } }
+
+        assertEquals(
+            emptyList(),
+            "".collectCodepoints(),
+        )
+        assertEquals(
+            listOf(0 to 'a'.code),
+            "a".collectCodepoints(),
+        )
+        assertEquals(
+            listOf(0 to 'a'.code, 1 to 0x1F995),
+            "a\uD83E\uDD95".collectCodepoints(),
+        )
+        assertEquals(
+            listOf(
+                0 to 0x1F995,
+                2 to 'a'.code,
+                3 to 0x1F996,
+            ),
+            "\uD83E\uDD95a\uD83E\uDD96".collectCodepoints(),
+        )
+    }
 }

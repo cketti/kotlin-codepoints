@@ -4,9 +4,10 @@
 )
 package de.cketti.codepoints.deluxe
 
-import de.cketti.codepoints.CodePoints
 import de.cketti.codepoints.codePointAt as intCodePointAt
 import de.cketti.codepoints.codePointBefore as intCodePointBefore
+import de.cketti.codepoints.forEachCodePoint as intForEachCodePoint
+import de.cketti.codepoints.forEachCodePointIndexed as intForEachCodePointIndexed
 
 /**
  * Returns the Unicode code point at the specified index.
@@ -54,50 +55,18 @@ fun CharSequence.codePointIterator(startIndex: Int = 0, endIndex: Int = length):
 }
 
 /**
- * Performs given [block] for each [CodePoint] in the [CharSequence]
- * between [startIndex] (inclusive) and [endIndex] (exclusive).
+ * Performs given [action] for each [CodePoint] in the [CharSequence].
  *
  * @see forEachCodePointIndexed
  */
 inline fun CharSequence.forEachCodePoint(
-    startIndex: Int = 0,
-    endIndex: Int = length,
-    block: (codePoint: CodePoint) -> Unit,
-) = forEachCodePointIndexed(startIndex, endIndex) { _, codePoint -> block(codePoint) }
+    action: (codePoint: CodePoint) -> Unit,
+) = intForEachCodePoint { action(it.toCodePoint()) }
 
 /**
- * Performs given [block] for each [CodePoint] in the [CharSequence]
- * between [startIndex] (inclusive) and [endIndex] (exclusive).
+ * Performs given [action] for each [CodePoint] in the [CharSequence].
  * Provides the start index for the given codepoint
- *
- * @param startIndex index of the first codepoint in CharSequence to start with (defaults to `0`)
- * @param endIndex index of the last codepoint in CharSequence to stop at (defaults to `length`)
  */
 inline fun CharSequence.forEachCodePointIndexed(
-    startIndex: Int = 0,
-    endIndex: Int = length,
-    block: (index: Int, codePoint: CodePoint) -> Unit,
-) {
-    require(startIndex <= endIndex) {
-        "startIndex ($startIndex) must be less than or equal to endIndex ($endIndex)"
-    }
-    require(endIndex <= length) {
-        "endIndex ($endIndex) must be less than or equal to char sequence's length ($length)"
-    }
-    val str = this
-    var index = startIndex
-    while (index < endIndex) {
-        val codePointStartIndex = index
-        val firstChar = str[index]
-        index++
-        if (firstChar.isHighSurrogate() && index < endIndex) {
-            val nextChar = str[index]
-            if (nextChar.isLowSurrogate()) {
-                block(codePointStartIndex, CodePoints.toCodePoint(firstChar, nextChar).toCodePoint())
-                index++
-                continue
-            }
-        }
-        block(codePointStartIndex, firstChar.toCodePoint())
-    }
-}
+    action: (index: Int, codePoint: CodePoint) -> Unit,
+) = intForEachCodePointIndexed { index, codePoint -> action(index, codePoint.toCodePoint()) }
