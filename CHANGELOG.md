@@ -7,6 +7,7 @@
 ### Added
 - `CodePoint.toUnicodeNotation()` returns the standard Unicode notation of a code point, e.g. `U+1F4E7`. 
 - `CharSequence.codePointCount()` variant without parameters.
+- `CodePoints.toString(…)` creates a string from the given code points.
 
 ## [0.8.0] - 2024-06-09
 ### Changed

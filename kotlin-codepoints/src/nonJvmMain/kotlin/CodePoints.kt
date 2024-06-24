@@ -74,4 +74,15 @@ actual object CodePoints {
 
         this[index] = value
     }
+    
+    actual fun toString(vararg codePoints: Int): String {
+        require(codePoints.all { isValidCodePoint(it) }) { "Array contains at least one invalid code point" }
+        
+        val charCount = codePoints.sumOf { charCount(it) }
+        return buildString(capacity = charCount) {
+            for (codePoint in codePoints) {
+                appendCodePoint(codePoint)
+            }
+        }
+    }
 }

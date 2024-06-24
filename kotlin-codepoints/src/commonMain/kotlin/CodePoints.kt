@@ -88,4 +88,13 @@ expect object CodePoints {
      * `destination[offset]` (high-surrogate) and `destination[offset+1]` (low-surrogate), and 2 is returned.
      */
     fun toChars(codePoint: Int, destination: CharArray, offset: Int): Int
+
+    /**
+     * Converts the given code points to a string.
+     * 
+     * @param codePoints Array of code points.
+     * 
+     * @throws IllegalArgumentException If any invalid code point is found in [codePoints].
+     */
+    fun toString(vararg codePoints: Int): String
 }
