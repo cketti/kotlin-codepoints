@@ -1,13 +1,20 @@
 # Changelog
 
-## [Unreleased]
+## [0.9.0] - 2024-06-24
 ### Changed
-- `CodePoint.toString()` now returns the string representation of a code point.
+- kotlin-codepoints-deluxe
+  - `CodePoint.toString()` now returns the string representation of a code point.
 
 ### Added
-- `CodePoint.toUnicodeNotation()` returns the standard Unicode notation of a code point, e.g. `U+1F4E7`. 
-- `CharSequence.codePointCount()` variant without parameters.
-- `CodePoints.toString(…)` creates a string from the given code points.
+- kotlin-codepoints
+  - Added `CharSequence.codePointCount()` variant without parameters.
+  - Added `CodePoints.toString(…)` that creates a string from the given code points.
+  - Added `CharSequence.forEachCodePoint()` and `CharSequence.forEachCodePointIndexed()` to iterate over code points in
+    a character sequence.
+- kotlin-codepoints-deluxe
+  - `CodePoint.toUnicodeNotation()` returns the standard Unicode notation of a code point, e.g. `U+1F4E7`.
+  - Added `CharSequence.forEachCodePoint()` and `CharSequence.forEachCodePointIndexed()` to iterate over code points in
+    a character sequence.
 
 ## [0.8.0] - 2024-06-09
 ### Changed
