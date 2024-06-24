@@ -2,7 +2,6 @@ package de.cketti.codepoints.deluxe
 
 import kotlin.test.assertEquals
 import kotlin.test.Test
-import kotlin.test.assertFailsWith
 
 class CharSequenceExtensionsTest {
     @Test

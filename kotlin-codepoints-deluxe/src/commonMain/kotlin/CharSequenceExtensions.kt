@@ -55,18 +55,22 @@ fun CharSequence.codePointIterator(startIndex: Int = 0, endIndex: Int = length):
 }
 
 /**
- * Performs given [action] for each [CodePoint] in the [CharSequence].
- *
- * @see forEachCodePointIndexed
+ * Performs the given [action] for each code point in this character sequence.
  */
-inline fun CharSequence.forEachCodePoint(
-    action: (codePoint: CodePoint) -> Unit,
-) = intForEachCodePoint { action(it.toCodePoint()) }
+inline fun CharSequence.forEachCodePoint(action: (codePoint: CodePoint) -> Unit) {
+    intForEachCodePoint { codePoint ->
+        action(codePoint.toCodePoint())
+    }
+}
 
 /**
- * Performs given [action] for each [CodePoint] in the [CharSequence].
- * Provides the start index for the given codepoint
+ * Performs the given [action] for each code point in this character sequence.
+ *
+ * @param action The start index of the current code point is provided as the first argument to this function. The
+ *   code point as [CodePoint] instance as the second argument.
  */
-inline fun CharSequence.forEachCodePointIndexed(
-    action: (index: Int, codePoint: CodePoint) -> Unit,
-) = intForEachCodePointIndexed { index, codePoint -> action(index, codePoint.toCodePoint()) }
+inline fun CharSequence.forEachCodePointIndexed(action: (index: Int, codePoint: CodePoint) -> Unit) {
+    intForEachCodePointIndexed { index, codePoint ->
+        action(index, codePoint.toCodePoint())
+    }
+}
