@@ -14,27 +14,23 @@ value class CodePointSequence(private val text: CharSequence) : Sequence<CodePoi
 
 /**
  * Iterator for [CodePoint]s in the given [CharSequence].
- * 
- * The `startIndex` and `endIndex` parameters are the regular `CharSequence` indices, i.e. the number of `Char`s from 
- * the start of the character sequence.
  */
-class CodePointIterator(
-    private val text: CharSequence,
-    startIndex: Int,
-    private val endIndex: Int
-) : Iterator<CodePoint> {
-    private var index = startIndex
-    
+class CodePointIterator internal constructor(private val text: CharSequence) : Iterator<CodePoint> {
+
+    @Deprecated(
+        message = "Call CharSequence.codePointIterator() on a sub-sequence instead",
+        replaceWith = ReplaceWith("text.subSequence(startIndex, endIndex).codePointIterator()"),
+    )
+    constructor(text: CharSequence, startIndex: Int, endIndex: Int) : this(text.subSequence(startIndex, endIndex))
+
+    private var index = 0
+
     override fun hasNext(): Boolean {
-        return index < endIndex
+        return index < text.length
     }
 
     override fun next(): CodePoint {
-        return if (index + 1 == endIndex) {
-            text[index].toCodePoint().also { 
-                index++ 
-            }
-        } else if (hasNext()) {
+        return if (hasNext()) {
             text.codePointAt(index).also { codePoint ->
                 index += codePoint.charCount
             }
