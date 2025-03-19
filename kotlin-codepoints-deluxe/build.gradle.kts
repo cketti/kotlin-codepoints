@@ -1,5 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -16,11 +16,16 @@ kotlin {
     iosX64()
     iosSimulatorArm64()
 
-    js(IR) {
-        browser {}
+    js {
+        browser()
+        nodejs()
     }
 
-    jvm()
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
+    }
 
     linuxArm64()
     linuxX64()
@@ -34,10 +39,16 @@ kotlin {
     tvosX64()
     tvosSimulatorArm64()
 
-    @Suppress("OPT_IN_USAGE")
-    wasmJs()
-    @Suppress("OPT_IN_USAGE")
-    wasmWasi()
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        nodejs()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
+        nodejs()
+    }
 
     watchosArm32()
     watchosArm64()
@@ -60,11 +71,6 @@ kotlin {
     }
 }
 
-tasks.withType<KotlinJvmCompile> {
-    compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
-}
-
-@Suppress("UnstableApiUsage")
 mavenPublishing {
     pom {
         name.set("kotlin-codepoint-deluxe")

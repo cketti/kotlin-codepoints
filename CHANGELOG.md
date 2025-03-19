@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Changed
+- Updated to Kotlin 2.1.10
+
 ## [0.9.0] - 2024-06-24
 ### Changed
 - kotlin-codepoints-deluxe
