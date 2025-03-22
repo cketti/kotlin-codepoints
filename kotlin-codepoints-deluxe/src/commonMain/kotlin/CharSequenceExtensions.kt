@@ -50,8 +50,16 @@ fun CharSequence.codePointSequence(): CodePointSequence {
 /**
  * Iterator for [CodePoint]s in this character sequence.
  */
+fun CharSequence.codePointIterator(): CodePointIterator {
+    return CodePointIterator(this)
+}
+
+@Deprecated(
+    message = "Call codePointIterator() on a sub-sequence instead",
+    replaceWith = ReplaceWith("this.subSequence(startIndex, endIndex).codePointIterator()")
+)
 fun CharSequence.codePointIterator(startIndex: Int = 0, endIndex: Int = length): CodePointIterator {
-    return CodePointIterator(this, startIndex, endIndex)
+    return this.subSequence(startIndex, endIndex).codePointIterator()
 }
 
 /**
