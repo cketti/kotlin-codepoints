@@ -31,50 +31,8 @@ class CodePointSequenceTest {
     }
 
     @Test
-    fun codePointIterator_with_start_index() {
-        val iterator = "a\uD83E\uDD95b".codePointIterator(startIndex = 1)
-
-        assertTrue(iterator.hasNext())
-        assertEquals("\uD83E\uDD95".codePointAt(0), iterator.next())
-        assertTrue(iterator.hasNext())
-        assertEquals('b'.toCodePoint(), iterator.next())
-        assertFalse(iterator.hasNext())
-        assertFailsWith<IndexOutOfBoundsException> {
-            iterator.next()
-        }
-    }
-
-    @Test
-    fun codePointIterator_with_end_index() {
-        val iterator = "a\uD83E\uDD95b".codePointIterator(endIndex = 3)
-
-        assertTrue(iterator.hasNext())
-        assertEquals('a'.toCodePoint(), iterator.next())
-        assertTrue(iterator.hasNext())
-        assertEquals("\uD83E\uDD95".codePointAt(0), iterator.next())
-        assertFalse(iterator.hasNext())
-        assertFailsWith<IndexOutOfBoundsException> {
-            iterator.next()
-        }
-    }
-
-    @Test
-    fun codePointIterator_with_start_and_end_index() {
-        val iterator = "ab\uD83E\uDD95c".codePointIterator(startIndex = 1, endIndex = 4)
-
-        assertTrue(iterator.hasNext())
-        assertEquals('b'.toCodePoint(), iterator.next())
-        assertTrue(iterator.hasNext())
-        assertEquals("\uD83E\uDD95".codePointAt(0), iterator.next())
-        assertFalse(iterator.hasNext())
-        assertFailsWith<IndexOutOfBoundsException> {
-            iterator.next()
-        }
-    }
-
-    @Test
-    fun codePointIterator_with_start_index_inside_surrogate_pair() {
-        val iterator = "a\uD83E\uDD95b".codePointIterator(startIndex = 2)
+    fun codePointIterator_starting_with_trailing_surrogate() {
+        val iterator = "\uDD95b".codePointIterator()
 
         assertTrue(iterator.hasNext())
         assertEquals('\uDD95'.toCodePoint(), iterator.next())
@@ -87,8 +45,8 @@ class CodePointSequenceTest {
     }
     
     @Test
-    fun codePointIterator_with_end_index_inside_surrogate_pair() {
-        val iterator = "a\uD83E\uDD95b".codePointIterator(endIndex = 2)
+    fun codePointIterator_ending_with_leading_surrogate() {
+        val iterator = "a\uD83E".codePointIterator()
 
         assertTrue(iterator.hasNext())
         assertEquals('a'.toCodePoint(), iterator.next())
