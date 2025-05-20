@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.10.0] - 2025-05-20
 ### Deprecated
 - kotlin-codepoints-deluxe
   - Deprecated `CharSequence.codePointIterator(startIndex, endIndex)`. Use `CharSequence.subSequence()` instead.
