@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+### Removed
+- kotlin-codepoints-deluxe
+  - Removed deprecated `CharSequence.codePointIterator(startIndex, endIndex)`.
+  - Removed deprecated `CodePointIterator` constructor.
+
 ## [0.10.0] - 2025-05-20
 ### Deprecated
 - kotlin-codepoints-deluxe

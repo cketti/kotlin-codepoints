@@ -16,13 +16,6 @@ value class CodePointSequence(private val text: CharSequence) : Sequence<CodePoi
  * Iterator for [CodePoint]s in the given [CharSequence].
  */
 class CodePointIterator internal constructor(private val text: CharSequence) : Iterator<CodePoint> {
-
-    @Deprecated(
-        message = "Call CharSequence.codePointIterator() on a sub-sequence instead",
-        replaceWith = ReplaceWith("text.subSequence(startIndex, endIndex).codePointIterator()"),
-    )
-    constructor(text: CharSequence, startIndex: Int, endIndex: Int) : this(text.subSequence(startIndex, endIndex))
-
     private var index = 0
 
     override fun hasNext(): Boolean {
